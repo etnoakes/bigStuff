@@ -1,16 +1,14 @@
+/*jshint esversion: 6 */
+
 // IIFE - Immediately Invoked Function Expression
 (function () {
 
     var canvas;
     var stage;
     var helloLabel;
-    
-    var rock;
-    var rocks = 0;
-    var rSpeed = 5;
-
-    var switcher = 1;
+    var rSpeed = 3;
     var topLeftQ;
+    
     
 
     function Start() {
@@ -28,6 +26,8 @@
 
         //create rectangle rockText moves inside of 
         topLeftQ = new createjs.Rectangle(0,0,595,460);
+
+
         
         // Start the game
         Game();
@@ -35,45 +35,7 @@
 
     // called every frame
     function Update() {
-        helloLabel.rotation += rSpeed;
-        
-        switch(switcher)
-        {
-            case 1:
-                rock.x += rSpeed;
-                if(rock.x==(topLeftQ.width)){
-                    switcher = 2;
-                    console.log(switcher);
-                    console.log(topLeftQ.height);
-                }  
-            break;
-            case 2:
-                rock.y += rSpeed;
-                if(rock.y==(topLeftQ.height)){
-                    switcher = 3;
-                    console.log(switcher);
-                }  
-                rocks++; 
-            break;
-            case 3:
-                rock.x -= rSpeed;
-                if((rocks>0) && (rocks<4)){
-                    console.log("Rocks off");
-                }
-                if(rock.x==((topLeftQ.width)-(topLeftQ.width))){
-                    switcher = 4;
-                    console.log(switcher);
-                }  
-            break;
-            case 4:
-                rock.y -= rSpeed;
-                if(rock.y==((topLeftQ.height)-(topLeftQ.height))){
-                    switcher = 1;
-                    console.log(switcher);
-                }  
-            break;
-        }
-
+        helloLabel.rotation += rSpeed; 
         stage.update();
     }
 
@@ -86,13 +48,11 @@
         helloLabel.x = 320;
         helloLabel.y = 240;
 
-        rock = new createjs.Text("Rock", "20px serif", "#234");
 
         stage.addChild(helloLabel);
-        stage.addChild(rock); 
+        stage.addChild(_asteroid.spawn);
     }
 
+
     window.onload = Start;
-
-
 })();
